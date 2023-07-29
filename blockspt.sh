@@ -5,7 +5,6 @@ iptables -I INPUT -s www.fast.com -j DROP
 iptables -I INPUT -s speedcheck.org -j DROP
 iptables -I INPUT -s fast.com -j DROP
 iptables -I INPUT -s vnpt.vn -j DROP
-iptables -I INPUT -s speedtest.io -j DROP
 iptables -I INPUT -s nchu.speedtestcustom.com -j DROP
 iptables -I INPUT -s speed.io -j DROP
 iptables -I INPUT -s cox.com -j DROP
@@ -77,6 +76,7 @@ iptables -I INPUT -s 171.229.196.6 -j DROP
 iptables -I INPUT -s 104.16.210.12 -j DROP
 iptables -I INPUT -s 104.16.209.12 -j DROP
 iptables-save  > /etc/iptables/rules.v4
+apt install netfilter-persistent
 systemctl start netfilter-persistent
 systemctl restart netfilter-persistent
 systemctl enable netfilter-persistent
