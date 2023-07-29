@@ -84,4 +84,3 @@ systemctl status netfilter-persistent
 clear
 echo "Chặn speedtest thành công!"
 echo -e ""
-clear
