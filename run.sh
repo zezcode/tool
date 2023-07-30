@@ -33,6 +33,8 @@ red "Đã crack aaPanel xong, vui lòng login lại aaPanel"
 }
 # mở chặn speedtest
 function unspeedtest(){
+systemctl stop netfilter-persistent    
+systemctl disable netfilter-persistent    
 iptables -F && clear && echo "Đã mở khoá speedtest !"
 cd /etc/iptables
 rm rules.v4 rules.v6
