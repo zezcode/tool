@@ -1,0 +1,1132 @@
+{
+  "1": {
+    "id": 1,
+    "type": "file",
+    "harm": "High",
+    "repaired": "1",
+    "level": "3",
+    "name": "Bảo đảm SSH",
+    "file": "/etc/ssh/sshd_config",
+    "Suggestions": "Các cài đặt khuyến nghị trong /etc/ssh/sshd_config, nên cài đặt số lần nhập mật khẩu sai tối đa là 5 lần",
+    "repair": "ht4g",
+    "rule": [
+      {
+        "re": "\nht4g\\s*(\\d+)",
+        "check": {
+          "type": "number",
+          "max": 7,
+          "min": 3
+        }
+      }
+    ],
+    "repair_loophole": [
+      {
+        "re": "\n?#?ht4g\\s*(\\d+)",
+        "check": "\nht4g"
+      }
+    ]
+  },
+  "2": {
+    "id": 2,
+    "repaired": "1",
+    "type": "file",
+    "harm": "High",
+    "level": "3",
+    "name": "SSHD sử dụng giao thức bảo mật V2",
+    "file": "/etc/ssh/sshd_config",
+    "Suggestions": "Các khuyến nghị củng cố có trong Tập tin đặt các thông số như sau /etc/ssh/sshd_config ",
+    "repair": "Protocol 2",
+    "rule": [
+      {
+        "re": "\nProtocol\\s*(\\d+)",
+        "check": {
+          "type": "number",
+          "max": 3,
+          "min": 1
+        }
+      }
+    ],
+    "repair_loophole": [
+      {
+        "re": "\n?#?Protocol\\s*(\\d+)",
+        "check": "\nProtocol 2"
+      }
+    ]
+  },
+  "3": {
+    "id": 3,
+    "repaired": "1",
+    "type": "file",
+    "harm": "High",
+    "level": "3",
+    "name": "Đặt thời gian chờ SSH",
+    "file": "/etc/ssh/sshd_config",
+    "Suggestions": "Các khuyến nghị củng cố có trong /etc/ssh/sshd_config đặt ClientAliveInterval thành 300 đến 900, tức là 5-15 phút và ClientAliveCountMax thành 0-3",
+    "repair": "ClientAliveInterval 600  ClientAliveCountMax 2",
+    "rule": [
+      {
+        "re": "\nClientAliveInterval\\s*(\\d+)",
+        "check": {
+          "type": "number",
+          "max": 900,
+          "min": 300
+        }
+      }
+    ],
+    "repair_loophole": [
+      {
+        "re": "\n?#?ClientAliveInterval\\s*(\\d+)",
+        "check": "\nClientAliveInterval 600"
+      }
+    ]
+  },
+  "4": {
+    "id": 4,
+    "repaired": "1",
+    "type": "file",
+    "harm": "High",
+    "level": "3",
+    "name": "Bảo đảm SSH LogLevel đặt thành INFO",
+    "file": "/etc/ssh/sshd_config",
+    "Suggestions": "Các khuyến nghị củng cố có trong /etc/ssh/sshd_config",
+    "repair": "LogLevel INFO",
+    "rule": [
+      {
+        "re": "\nLogLevel\\s*(\\w+)",
+        "check": {
+          "type": "string",
+          "value": [ "INFO" ]
+        }
+      }
+    ],
+    "repair_loophole": [
+      {
+        "re": "\n?#?LogLevel\\s*(\\w+)",
+        "check": "\nLogLevel INFO"
+      }
+    ]
+  },
+  "5": {
+    "id": 5,
+    "repaired": "1",
+    "type": "file",
+    "harm": "High",
+    "level": "3",
+    "name": "Cấm người dùng SSH bỏ trống mật khẩu đăng nhập",
+    "file": "/etc/ssh/sshd_config",
+    "Suggestions": "Các khuyến nghị củng cố có trong /etc/ssh/sshd_config cài đặt PermitEmptyPasswords thành 0",
+    "repair": "PermitEmptyPasswords no",
+    "rule": [
+      {
+        "re": "\nPermitEmptyPasswords\\s*(\\w+)",
+        "check": {
+          "type": "string",
+          "value": [ "no" ]
+        }
+      }
+    ],
+    "repair_loophole": [
+      {
+        "re": "\n?#?PermitEmptyPasswords\\s*(\\w+)",
+        "check": "\nPermitEmptyPasswords no"
+      }
+    ]
+  },
+  "6": {
+    "id": 6,
+    "repaired": "1",
+    "type": "file",
+    "name": "SSH sử dụng cổng mặc định 22",
+    "harm": "High",
+    "level": "3",
+    "file": "/etc/ssh/sshd_config",
+    "Suggestions": "Các khuyến nghị củng cố có trong /etc/ssh/sshd_config Ví dụ: Đặt cổng mặc định thành cổng từ 6000 đến 65535",
+    "repair": "Port 60151",
+    "rule": [
+      {
+        "re": "Port\\s*(\\d+)",
+        "check": {
+          "type": "number",
+          "max": 65535,
+          "min": 22
+        }
+      }
+    ],
+    "repair_loophole": [
+      {
+        "re": "\n?#?Port\\s*(\\d+)",
+        "check": "\nPort 65531"
+      }
+    ]
+  },
+  "13": {
+    "id": 13,
+    "repaired": "1",
+    "harm": "High",
+    "level": "3",
+    "type": "chmod",
+    "chmod": "644",
+    "user": "root",
+    "group": "root",
+    "file": "/www/server/panel/BTPanel",
+    "name": "Bảng điều khiển bị lỗi do hỏng các file quan trọng"
+  },
+  "14": {
+    "id": 14,
+    "repaired": "1",
+    "harm": "High",
+    "level": "3",
+    "type": "chmod",
+    "chmod": "600",
+    "user": "root",
+    "group": "root",
+    "file": "/www/server/panel/class",
+    "name": "Bảng điều khiển bị lỗi do hỏng các file quan trọng"
+  },
+  "15": {
+    "id": 15,
+    "repaired": "1",
+    "harm": "High",
+    "level": "3",
+    "type": "chmod",
+    "chmod": "600",
+    "user": "root",
+    "group": "root",
+    "file": "/www/server/panel/config",
+    "name": "Bảng điều khiển bị lỗi do hỏng các file quan trọng"
+  },
+  "17": {
+    "id": 17,
+    "repaired": "1",
+    "harm": "High",
+    "level": "3",
+    "type": "chmod",
+    "chmod": "644",
+    "user": "root",
+    "group": "root",
+    "file": "/www/server/panel/install",
+    "name": "Bảng điều khiển bị lỗi do hỏng các file quan trọng"
+  },
+  "18": {
+    "id": 18,
+    "repaired": "1",
+    "harm": "High",
+    "level": "3",
+    "type": "chmod",
+    "chmod": "644",
+    "user": "root",
+    "group": "root",
+    "file": "/www/server/panel/logs",
+    "name": "Bảng điều khiển bị lỗi do hỏng các file quan trọng"
+  },
+  "19": {
+    "id": 19,
+    "repaired": "1",
+    "harm": "High",
+    "level": "3",
+    "type": "chmod",
+    "chmod": "644",
+    "user": "root",
+    "group": "root",
+    "file": "/www/server/panel/package",
+    "name": "Bảng điều khiển bị lỗi do hỏng các file quan trọng"
+  },
+  "20": {
+    "id": 20,
+    "repaired": "1",
+    "harm": "High",
+    "level": "3",
+    "type": "chmod",
+    "chmod": "644",
+    "user": "root",
+    "group": "root",
+    "file": "/www/server/panel/plugin",
+    "name": "Bảng điều khiển bị lỗi do hỏng các file quan trọng"
+  },
+  "21": {
+    "id": 21,
+    "repaired": "1",
+    "harm": "High",
+    "level": "3",
+    "type": "chmod",
+    "chmod": "644",
+    "user": "root",
+    "group": "root",
+    "file": "/www/server/panel/rewrite",
+    "name": "Bảng điều khiển bị lỗi do hỏng các file quan trọng"
+  },
+  "22": {
+    "id": 22,
+    "repaired": "1",
+    "harm": "High",
+    "level": "3",
+    "type": "chmod",
+    "chmod": "644",
+    "user": "root",
+    "group": "root",
+    "file": "/www/server/panel/ssl",
+    "name": "Bảng điều khiển bị lỗi do hỏng các file quan trọng"
+  },
+  "23": {
+    "id": 23,
+    "repaired": "1",
+    "harm": "High",
+    "level": "3",
+    "type": "chmod",
+    "chmod": "644",
+    "user": "root",
+    "group": "root",
+    "file": "/www/server/panel/temp",
+    "name": "Bảng điều khiển bị lỗi do hỏng các file quan trọng"
+  },
+  "24": {
+    "id": 24,
+    "repaired": "1",
+    "harm": "High",
+    "level": "3",
+    "type": "chmod",
+    "chmod": "644",
+    "user": "root",
+    "group": "root",
+    "file": "/www/server/panel/vhost",
+    "name": "Bảng điều khiển bị lỗi do hỏng các file quan trọng"
+  },
+  "25": {
+    "id": 25,
+    "repaired": "1",
+    "type": "file",
+    "harm": "Medium",
+    "level": "2",
+    "name": "PHP 5.2 phiên bản phụ ",
+    "file": "/www/server/php/52/etc/php.ini",
+    "Suggestions": "Đề xuất tăng cường trong /www/server/php/52/etc/php.ini expose_php giá trị được thay đổi thành Off",
+    "repair": "expose_php = Off",
+    "rule": [
+      {
+        "re": "\nexpose_php\\s*=\\s*(\\w+)",
+        "check": {
+          "type": "string",
+          "value": [ "Off" ]
+        }
+      }
+    ],
+    "repair_loophole": [
+      {
+        "re": "\n?;?expose_php\\s*=\\s*(\\w+)",
+        "check": "\nexpose_php = Off"
+      }
+    ]
+  },
+  "26": {
+    "id": 26,
+    "repaired": "1",
+    "type": "file",
+    "harm": "Medium",
+    "level": "2",
+    "name": "PHP 5.3 phiên bản phụ",
+    "file": "/www/server/php/53/etc/php.ini",
+    "Suggestions": "Đề xuất tăng cường trong /www/server/php/53/etc/php.ini expose_php giá trị được thay đổi thành Off",
+    "repair": "expose_php = Off",
+    "rule": [
+      {
+        "re": "\nexpose_php\\s*=\\s*(\\w+)",
+        "check": {
+          "type": "string",
+          "value": [ "Off" ]
+        }
+      }
+    ],
+    "repair_loophole": [
+      {
+        "re": "\n?;?expose_php\\s*=\\s*(\\w+)",
+        "check": "\nexpose_php = Off"
+      }
+    ]
+  },
+  "27": {
+    "id": 27,
+    "repaired": "1",
+    "type": "file",
+    "harm": "Medium",
+    "level": "2",
+    "name": "PHP 5.4 phiên bản phụ",
+    "file": "/www/server/php/54/etc/php.ini",
+    "Suggestions": "Đề xuất tăng cường trong /www/server/php/54/etc/php.ini expose_php giá trị được thay đổi thành Off",
+    "repair": "expose_php = Off",
+    "rule": [
+      {
+        "re": "\nexpose_php\\s*=\\s*(\\w+)",
+        "check": {
+          "type": "string",
+          "value": [ "Off" ]
+        }
+      }
+    ],
+    "repair_loophole": [
+      {
+        "re": "\n?;?expose_php\\s*=\\s*(\\w+)",
+        "check": "\nexpose_php = Off"
+      }
+    ]
+  },
+  "28": {
+    "id": 28,
+    "repaired": "1",
+    "type": "file",
+    "harm": "Medium",
+    "level": "2",
+    "name": "PHP 5.5 phiên bản phụ",
+    "file": "/www/server/php/55/etc/php.ini",
+    "Suggestions": "Đề xuất tăng cường trong /www/server/php/55/etc/php.ini expose_php giá trị được thay đổi thành Off",
+    "repair": "expose_php = Off",
+    "rule": [
+      {
+        "re": "\nexpose_php\\s*=\\s*(\\w+)",
+        "check": {
+          "type": "string",
+          "value": [ "Off" ]
+        }
+      }
+    ],
+    "repair_loophole": [
+      {
+        "re": "\n?;?expose_php\\s*=\\s*(\\w+)",
+        "check": "\nexpose_php = Off"
+      }
+    ]
+  },
+  "29": {
+    "id": 29,
+    "repaired": "1",
+    "type": "file",
+    "harm": "Medium",
+    "level": "2",
+    "name": "PHP 5.6 phiên bản phụ",
+    "file": "/www/server/php/56/etc/php.ini",
+    "Suggestions": "Đề xuất tăng cường trong /www/server/php/56/etc/php.ini expose_php giá trị được thay đổi thành Off",
+    "repair": "expose_php = Off",
+    "rule": [
+      {
+        "re": "\nexpose_php\\s*=\\s*(\\w+)",
+        "check": {
+          "type": "string",
+          "value": [ "Off" ]
+        }
+      }
+    ],
+    "repair_loophole": [
+      {
+        "re": "\n?;?expose_php\\s*=\\s*(\\w+)",
+        "check": "\nexpose_php = Off"
+      }
+    ]
+  },
+  "30": {
+    "id": 30,
+    "type": "file",
+    "repaired": "1",
+    "harm": "Medium",
+    "level": "2",
+    "name": "PHP 7.0 phiên bản phụ",
+    "file": "/www/server/php/70/etc/php.ini",
+    "Suggestions": "Đề xuất tăng cường trong /www/server/php/70/etc/php.ini expose_php giá trị được thay đổi thành Off",
+    "repair": "expose_php = Off",
+    "rule": [
+      {
+        "re": "\nexpose_php\\s*=\\s*(\\w+)",
+        "check": {
+          "type": "string",
+          "value": [ "Off" ]
+        }
+      }
+    ],
+    "repair_loophole": [
+      {
+        "re": "\n?;?expose_php\\s*=\\s*(\\w+)",
+        "check": "\nexpose_php = Off"
+      }
+    ]
+  },
+  "31": {
+    "id": 31,
+    "repaired": "1",
+    "type": "file",
+    "harm": "Medium",
+    "level": "2",
+    "name": "PHP 7.1 phiên bản phụ",
+    "file": "/www/server/php/71/etc/php.ini",
+    "Suggestions": "Đề xuất tăng cường trong /www/server/php/71/etc/php.ini expose_php giá trị được thay đổi thành Off",
+    "repair": "expose_php = Off",
+    "rule": [
+      {
+        "re": "\nexpose_php\\s*=\\s*(\\w+)",
+        "check": {
+          "type": "string",
+          "value": [ "Off" ]
+        }
+      }
+    ],
+    "repair_loophole": [
+      {
+        "re": "\n?;?expose_php\\s*=\\s*(\\w+)",
+        "check": "\nexpose_php = Off"
+      }
+    ]
+  },
+  "32": {
+    "id": 32,
+    "repaired": "1",
+    "type": "file",
+    "harm": "Medium",
+    "level": "2",
+    "name": "PHP 7.2 phiên bản phụ",
+    "file": "/www/server/php/72/etc/php.ini",
+    "Suggestions": "Đề xuất tăng cường trong /www/server/php/72/etc/php.ini expose_php giá trị được thay đổi thành Off",
+    "repair": "expose_php = Off",
+    "rule": [
+      {
+        "re": "\nexpose_php\\s*=\\s*(\\w+)",
+        "check": {
+          "type": "string",
+          "value": [ "Off" ]
+        }
+      }
+    ],
+    "repair_loophole": [
+      {
+        "re": "\n?;?expose_php\\s*=\\s*(\\w+)",
+        "check": "\nexpose_php = Off"
+      }
+    ]
+  },
+  "32.5": {
+    "id": 32.5,
+    "repaired": "1",
+    "type": "file",
+    "harm": "Medium",
+    "level": "2",
+    "name": "PHP 7.3 phiên bản phụ",
+    "file": "/www/server/php/73/etc/php.ini",
+    "Suggestions": "Đề xuất tăng cường trong /www/server/php/73/etc/php.ini expose_php giá trị được thay đổi thành Off",
+    "repair": "expose_php = Off",
+    "rule": [
+      {
+        "re": "\nexpose_php\\s*=\\s*(\\w+)",
+        "check": {
+          "type": "string",
+          "value": [ "Off" ]
+        }
+      }
+    ],
+    "repair_loophole": [
+      {
+        "re": "\n?;?expose_php\\s*=\\s*(\\w+)",
+        "check": "\nexpose_php = Off"
+      }
+    ]
+  },
+  "33": {
+    "id": 33,
+    "repaired": "1",
+    "type": "file",
+    "harm": "Danger",
+    "level": "5",
+    "name": "Các chức năng nguy hiểm của PHP 5.2 không bị tắt",
+    "file": "/www/server/php/52/etc/php.ini",
+    "Suggestions": "Đề xuất tăng cường trong /www/server/php/52/etc/php.ini ở disable_functions= :",
+    "repair": "disable_functions = passthru,exec,system,chroot,chgrp,chown,shell_exec,popen,proc_open,ini_alter,ini_restore,dl,openlog,syslog,readlink,symlink,popepassthru,putenv",
+    "rule": [
+      {
+        "re": "\ndisable_functions\\s?=\\s?(.+)",
+        "check": {
+          "type": "string",
+          "value": [
+            "passthru,exec,system,chroot,chgrp,chown,shell_exec,popen,proc_open,ini_alter,ini_restore,dl,openlog,syslog,readlink,symlink,popepassthru,putenv"
+          ]
+        }
+      }
+    ],
+    "repair_loophole": [
+      {
+        "re": "\ndisable_functions\\s?=\\s?(.+)",
+        "check": "\ndisable_functions = passthru,exec,system,chroot,chgrp,chown,shell_exec,popen,proc_open,ini_alter,ini_restore,dl,openlog,syslog,readlink,symlink,popepassthru,putenv"
+      }
+    ]
+  },
+  "34": {
+    "id": 34,
+    "repaired": "1",
+    "type": "file",
+    "harm": "Danger",
+    "level": "5",
+    "name": "Các chức năng nguy hiểm của PHP 5.3 không bị tắt",
+    "file": "/www/server/php/53/etc/php.ini",
+    "Suggestions": "Đề xuất tăng cường trong /www/server/php/53/etc/php.ini ở disable_functions= :",
+    "repair": "disable_functions = passthru,exec,system,chroot,chgrp,chown,shell_exec,popen,proc_open,ini_alter,ini_restore,dl,openlog,syslog,readlink,symlink,popepassthru,putenv",
+    "rule": [
+      {
+        "re": "\ndisable_functions\\s?=\\s?(.+)",
+        "check": {
+          "type": "string",
+          "value": [
+            "passthru,exec,system,chroot,chgrp,chown,shell_exec,popen,proc_open,ini_alter,ini_restore,dl,openlog,syslog,readlink,symlink,popepassthru,putenv"
+          ]
+        }
+      }
+    ],
+    "repair_loophole": [
+      {
+        "re": "\ndisable_functions\\s?=\\s?(.+)",
+        "check": "\ndisable_functions = passthru,exec,system,chroot,chgrp,chown,shell_exec,popen,proc_open,ini_alter,ini_restore,dl,openlog,syslog,readlink,symlink,popepassthru,putenv"
+      }
+    ]
+  },
+  "35": {
+    "id": 35,
+    "repaired": "1",
+    "type": "file",
+    "harm": "Danger",
+    "level": "5",
+    "name": "Các chức năng nguy hiểm của PHP 5.4 không bị tắt",
+    "file": "/www/server/php/54/etc/php.ini",
+    "Suggestions": "Đề xuất tăng cường trong /www/server/php/54/etc/php.ini ở disable_functions= :",
+    "repair": "disable_functions = passthru,exec,system,chroot,chgrp,chown,shell_exec,popen,proc_open,ini_alter,ini_restore,dl,openlog,syslog,readlink,symlink,popepassthru,putenv",
+    "rule": [
+      {
+        "re": "\ndisable_functions\\s?=\\s?(.+)",
+        "check": {
+          "type": "string",
+          "value": [
+            "passthru,exec,system,chroot,chgrp,chown,shell_exec,popen,proc_open,ini_alter,ini_restore,dl,openlog,syslog,readlink,symlink,popepassthru,putenv"
+          ]
+        }
+      }
+    ],
+    "repair_loophole": [
+      {
+        "re": "\ndisable_functions\\s?=\\s?(.+)",
+        "check": "\ndisable_functions = passthru,exec,system,chroot,chgrp,chown,shell_exec,popen,proc_open,ini_alter,ini_restore,dl,openlog,syslog,readlink,symlink,popepassthru,putenv"
+      }
+    ]
+  },
+  "36": {
+    "id": 36,
+    "repaired": "1",
+    "type": "file",
+    "harm": "Danger",
+    "level": "5",
+    "name": "Các chức năng nguy hiểm của PHP 5.5 không bị tắt",
+    "file": "/www/server/php/55/etc/php.ini",
+    "Suggestions": "Đề xuất tăng cường trong /www/server/php/55/etc/php.ini ở disable_functions= :",
+    "repair": "disable_functions = passthru,exec,system,chroot,chgrp,chown,shell_exec,popen,proc_open,ini_alter,ini_restore,dl,openlog,syslog,readlink,symlink,popepassthru,putenv",
+    "rule": [
+      {
+        "re": "\ndisable_functions\\s?=\\s?(.+)",
+        "check": {
+          "type": "string",
+          "value": [
+            "passthru,exec,system,chroot,chgrp,chown,shell_exec,popen,proc_open,ini_alter,ini_restore,dl,openlog,syslog,readlink,symlink,popepassthru,putenv"
+          ]
+        }
+      }
+    ],
+    "repair_loophole": [
+      {
+        "re": "\ndisable_functions\\s?=\\s?(.+)",
+        "check": "\ndisable_functions = passthru,exec,system,chroot,chgrp,chown,shell_exec,popen,proc_open,ini_alter,ini_restore,dl,openlog,syslog,readlink,symlink,popepassthru,putenv"
+      }
+    ]
+  },
+  "37": {
+    "id": 37,
+    "repaired": "1",
+    "type": "file",
+    "harm": "Danger",
+    "level": "5",
+    "name": "Các chức năng nguy hiểm của PHP 5.6 không bị tắt",
+    "file": "/www/server/php/56/etc/php.ini",
+    "Suggestions": "Đề xuất tăng cường trong/www/server/php/56/etc/php.ini ở disable_functions= :",
+    "repair": "disable_functions = passthru,exec,system,chroot,chgrp,chown,shell_exec,popen,proc_open,ini_alter,ini_restore,dl,openlog,syslog,readlink,symlink,popepassthru,putenv",
+    "rule": [
+      {
+        "re": "\ndisable_functions\\s?=\\s?(.+)",
+        "check": {
+          "type": "string",
+          "value": [
+            "passthru,exec,system,chroot,chgrp,chown,shell_exec,popen,proc_open,ini_alter,ini_restore,dl,openlog,syslog,readlink,symlink,popepassthru,putenv"
+          ]
+        }
+      }
+    ],
+    "repair_loophole": [
+      {
+        "re": "\ndisable_functions\\s?=\\s?(.+)",
+        "check": "\ndisable_functions = passthru,exec,system,chroot,chgrp,chown,shell_exec,popen,proc_open,ini_alter,ini_restore,dl,openlog,syslog,readlink,symlink,popepassthru,putenv"
+      }
+    ]
+  },
+  "38": {
+    "id": 38,
+    "repaired": "1",
+    "type": "file",
+    "harm": "Danger",
+    "level": "5",
+    "name": "Các chức năng nguy hiểm của PHP 7.0 không bị tắt",
+    "file": "/www/server/php/70/etc/php.ini",
+    "Suggestions": "Đề xuất tăng cường trong /www/server/php/70/etc/php.ini ở disable_functions= :",
+    "repair": "disable_functions = passthru,exec,system,chroot,chgrp,chown,shell_exec,popen,proc_open,ini_alter,ini_restore,dl,openlog,syslog,readlink,symlink,popepassthru,putenv",
+    "rule": [
+      {
+        "re": "\ndisable_functions\\s?=\\s?(.+)",
+        "check": {
+          "type": "string",
+          "value": [
+            "passthru,exec,system,chroot,chgrp,chown,shell_exec,popen,proc_open,ini_alter,ini_restore,dl,openlog,syslog,readlink,symlink,popepassthru,putenv"
+          ]
+        }
+      }
+    ],
+    "repair_loophole": [
+      {
+        "re": "\ndisable_functions\\s?=\\s?(.+)",
+        "check": "\ndisable_functions = passthru,exec,system,chroot,chgrp,chown,shell_exec,popen,proc_open,ini_alter,ini_restore,dl,openlog,syslog,readlink,symlink,popepassthru,putenv"
+      }
+    ]
+  },
+  "39": {
+    "id": 39,
+    "type": "file",
+    "harm": "Danger",
+    "repaired": "1",
+    "level": "5",
+    "name": "Các chức năng nguy hiểm của PHP 7.1 không bị tắt",
+    "file": "/www/server/php/71/etc/php.ini",
+    "Suggestions": "Đề xuất tăng cường trong /www/server/php/71/etc/php.ini ở disable_functions= :",
+    "repair": "disable_functions = passthru,exec,system,chroot,chgrp,chown,shell_exec,popen,proc_open,ini_alter,ini_restore,dl,openlog,syslog,readlink,symlink,popepassthru,putenv",
+    "rule": [
+      {
+        "re": "\ndisable_functions\\s?=\\s?(.+)",
+        "check": {
+          "type": "string",
+          "value": [
+            "passthru,exec,system,chroot,chgrp,chown,shell_exec,popen,proc_open,ini_alter,ini_restore,dl,openlog,syslog,readlink,symlink,popepassthru,putenv"
+          ]
+        }
+      }
+    ],
+    "repair_loophole": [
+      {
+        "re": "\ndisable_functions\\s?=\\s?(.+)",
+        "check": "\ndisable_functions = passthru,exec,system,chroot,chgrp,chown,shell_exec,popen,proc_open,ini_alter,ini_restore,dl,openlog,syslog,readlink,symlink,popepassthru,putenv"
+      }
+    ]
+  },
+  "40": {
+    "id": 40,
+    "type": "file",
+    "repaired": "1",
+    "harm": "Danger",
+    "level": "5",
+    "name": "Các chức năng nguy hiểm của PHP 7.2 không bị tắt",
+    "file": "/www/server/php/72/etc/php.ini",
+    "Suggestions": "Đề xuất tăng cường, trong/www/server/php/72/etc/php.ini ở giữa disable_functions= :",
+    "repair": "disable_functions = passthru,exec,system,chroot,chgrp,chown,shell_exec,popen,proc_open,ini_alter,ini_restore,dl,openlog,syslog,readlink,symlink,popepassthru,putenv",
+    "rule": [
+      {
+        "re": "\ndisable_functions\\s?=\\s?(.+)",
+        "check": {
+          "type": "string",
+          "value": [
+            "passthru,exec,system,chroot,chgrp,chown,shell_exec,popen,proc_open,ini_alter,ini_restore,dl,openlog,syslog,readlink,symlink,popepassthru,putenv"
+          ]
+        }
+      }
+    ],
+    "repair_loophole": [
+      {
+        "re": "\ndisable_functions\\s?=\\s?(.+)",
+        "check": "\ndisable_functions = passthru,exec,system,chroot,chgrp,chown,shell_exec,popen,proc_open,ini_alter,ini_restore,dl,openlog,syslog,readlink,symlink,popepassthru,putenv"
+      }
+    ]
+  },
+  "40.5": {
+    "id": 40.5,
+    "repaired": "1",
+    "type": "file",
+    "harm": "Danger",
+    "level": "5",
+    "name": "Các chức năng nguy hiểm của PHP 7.3 không bị tắt",
+    "file": "/www/server/php/73/etc/php.ini",
+    "Suggestions": "Đề xuất tăng cường trong /www/server/php/73/etc/php.ini ở disable_functions= :",
+    "repair": "disable_functions = passthru,exec,system,chroot,chgrp,chown,shell_exec,popen,proc_open,ini_alter,ini_restore,dl,openlog,syslog,readlink,symlink,popepassthru,putenv",
+    "rule": [
+      {
+        "re": "\ndisable_functions\\s?=\\s?(.+)",
+        "check": {
+          "type": "string",
+          "value": [
+            "passthru,exec,system,chroot,chgrp,chown,shell_exec,popen,proc_open,ini_alter,ini_restore,dl,openlog,syslog,readlink,symlink,popepassthru,putenv"
+          ]
+        }
+      }
+    ],
+    "repair_loophole": [
+      {
+        "re": "\ndisable_functions\\s?=\\s?(.+)",
+        "check": "\ndisable_functions = passthru,exec,system,chroot,chgrp,chown,shell_exec,popen,proc_open,ini_alter,ini_restore,dl,openlog,syslog,readlink,symlink,popepassthru,putenv"
+      }
+    ]
+  },
+  "41": {
+    "id": 41,
+    "repaired": "0",
+    "type": "dir",
+    "harm": "High",
+    "level": "3",
+    "name": "PHP 5.2 ",
+    "file": "/www/server/php/52",
+    "Suggestions": "php5.2 ",
+    "repair": "PHP 5.2 ",
+    "rule": [],
+    "repair_loophole": [
+      {
+        "re": "",
+        "check": ""
+      }
+    ]
+  },
+  "42": {
+    "id": 42,
+    "repaired": "0",
+    "type": "file",
+    "harm": "High",
+    "level": "3",
+    "name": "Redis 0.0.0.0",
+    "check_file": "/www/server/redis",
+    "file": "/www/server/redis/redis.conf",
+    "Suggestions": "Đề xuất tăng cường trong /www/server/redis/redis.conf đổi thành bind 127.0.0.1",
+    "repair": "bind 127.0.0.1",
+    "rule": [
+      {
+        "re": "\nbind\\s*(.+)",
+        "check": {
+          "type": "string",
+          "value": [ "0.0.0.0" ]
+        }
+      }
+    ],
+    "repair_loophole": [
+      {
+        "re": "\nbind\\s*(.+)",
+        "check": "\nbind 127.0.0.1"
+      }
+    ]
+  },
+  "46": {
+    "id": 46,
+    "repaired": "0",
+    "type": "file",
+    "harm": "High",
+    "level": "3",
+    "name": "Memcache 0.0.0.0",
+    "check_file": "/usr/local/memcached",
+    "file": "/etc/init.d/memcached",
+    "Suggestions": "Đề xuất tăng cường trong /etc/init.d/memcached đổi thành IP=127.0.0.1",
+    "repair": "IP=127.0.0.1",
+    "rule": [
+      {
+        "re": "\nIP\\s?=\\s?(.+)",
+        "check": {
+          "type": "string",
+          "value": [ "0.0.0.0" ]
+        }
+      }
+    ],
+    "repair_loophole": [
+      {
+        "re": "\nIP\\s?=\\s?(.+)",
+        "check": "\nIP=127.0.0.1"
+      }
+    ]
+  },
+  "50": {
+    "id": 50,
+    "type": "file",
+    "repaired": "1",
+    "harm": "Medium",
+    "level": "2",
+    "name": "SSH ",
+    "file": "/etc/security/pwquality.conf",
+    "Suggestions": "/etc/security/pwquality.conf, minlen, minclass",
+    "repair": "minlen=10  minclass=3",
+    "rule": [
+      {
+        "re": "minlen\\s*=\\s*(\\d+)",
+        "check": {
+          "type": "number",
+          "max": 32,
+          "min": 9
+        }
+      }
+    ],
+    "repair_loophole": [
+      {
+        "re": "minlen\\s*=\\s*(\\d+)",
+        "check": "\nminlen=10"
+      }
+    ]
+  },
+  "51": {
+    "id": 51,
+    "type": "file",
+    "repaired": "1",
+    "harm": "High",
+    "level": "3",
+    "name": "Số ngày tối đa một mật khẩu có thể được sử dụng",
+    "file": "/etc/login.defs",
+    "Suggestions": "Bạn nên đổi mật khẩu sau một khoảng thời gian nhất định để đảm bảo an toàn, bạn có thể thay đổi số ngày tối đa một mật khẩu có thể được sử dụng trong /etc/login.defs ở PASS_MAX_DAYS 60-180",
+    "repair": "PASS_MAX_DAYS 90  Cần thực hiện cài đặt lệnh cùng một lúc với root: chage --maxdays 90 root",
+    "rule": [
+      {
+        "re": "PASS_MAX_DAYS\\s*(\\d+)",
+        "check": {
+          "type": "number",
+          "max": 180,
+          "min": 60
+        }
+      }
+    ],
+    "repair_loophole": [
+      {
+        "re": "PASS_MAX_DAYS\\s*(\\d+)",
+        "check": "\nPASS_MAX_DAYS 90"
+      }
+    ]
+  },
+  "52": {
+    "id": 52,
+    "type": "file",
+    "repaired": "1",
+    "harm": "Medium",
+    "level": "2",
+    "name": "Số ngày tối thiểu cho phép giữa các lần thay đổi mật khẩu",
+    "file": "/etc/login.defs",
+    "Suggestions": "Bạn nên đặt giới hạn thời gian giữa các lần thay đổi mật khẩu trong /etc/login.defs ở PASS_MIN_DAYS 1-3",
+    "repair": "PASS_MIN_DAYS 7  Cần thực hiện cài đặt lệnh cùng một lúc với root: chage --mindays 2 root",
+    "rule": [
+      {
+        "re": "PASS_MIN_DAYS\\s*(\\d+)",
+        "check": {
+          "type": "number",
+          "max": 14,
+          "min": 6
+        }
+      }
+    ],
+    "repair_loophole": [
+      {
+        "re": "PASS_MIN_DAYS\\s*(\\d+)",
+        "check": "\nPASS_MIN_DAYS 7"
+      }
+    ]
+  },
+  "54": {
+    "id": 54,
+    "repaired": "1",
+    "type": "file",
+    "harm": "Medium",
+    "level": "2",
+    "name": "Bật ngẫu nhiên hóa bố cục địa chỉ của không gian bộ nhớ",
+    "ps": "Bật ngẫu nhiên hóa địa chỉ không gian bộ nhớ để tăng độ khó để bảo vệ dữ liệu khi có kẻ xâm nhập",
+    "file": "/proc/sys/kernel/randomize_va_space",
+    "Suggestions": "Đề xuất: Thực hiện lệnh",
+    "repair": "sysctl -w kernel.randomize_va_space=2",
+    "rule": [
+      {
+        "re": "\\d+",
+        "check": {
+          "type": "number",
+          "max": 3,
+          "min": 1
+        }
+      }
+    ],
+    "repair_loophole": [
+      {
+        "re": "\\d+",
+        "check": "2"
+      }
+    ]
+  },
+  "55": {
+    "id": 55,
+    "repaired": "1",
+    "type": "file",
+    "harm": "Medium",
+    "level": "2",
+    "name": "Số ngày cảnh báo được đưa ra trước khi mật khẩu hết hạn",
+    "file": "/etc/login.defs",
+    "Suggestions": "Bạn nên cài đặt số ngày cảnh báo được đưa ra trước khi mật khẩu hết hạn trong /etc/login.defs ở PASS_WARN_AGE 7-14",
+    "repair": "PASS_WARN_AGE 7  Cần thực hiện cài đặt lệnh cùng một lúc với root: chage --warndays 7 root",
+    "rule": [
+      {
+        "re": "\nPASS_WARN_AGE\\s*(\\d+)",
+        "check": {
+          "type": "number",
+          "max": 15,
+          "min": 6
+        }
+      }
+    ],
+    "repair_loophole": [
+      {
+        "re": "\nPASS_WARN_AGE\\s*(\\d+)",
+        "check": "\nPASS_WARN_AGE 7"
+      }
+    ]
+  },
+  "57": {
+    "id": 57,
+    "repaired": "1",
+    "harm": "High",
+    "level": "3",
+    "type": "chmod",
+    "chmod": "644",
+    "user": "root",
+    "group": "root",
+    "file": "/etc/passwd",
+    "name": "Tệp tin quan trọng của hệ thống bị hỏng /etc/passwd"
+  },
+  "58": {
+    "id": 58,
+    "harm": "High",
+    "repaired": "1",
+    "level": "3",
+    "type": "chmod",
+    "chmod": "400",
+    "user": "root",
+    "group": "root",
+    "file": "/etc/shadow",
+    "name": "Tệp tin quan trọng của hệ thống bị hỏng /etc/shadow"
+  },
+  "59": {
+    "id": 59,
+    "repaired": "1",
+    "harm": "High",
+    "level": "3",
+    "type": "chmod",
+    "chmod": "644",
+    "user": "root",
+    "group": "root",
+    "file": "/etc/group",
+    "name": "Tệp tin quan trọng của hệ thống bị hỏng /etc/group"
+  },
+  "60": {
+    "id": 60,
+    "repaired": "1",
+    "harm": "High",
+    "level": "3",
+    "type": "chmod",
+    "chmod": "400",
+    "user": "root",
+    "group": "root",
+    "file": "/etc/gshadow",
+    "name": "Tệp tin quan trọng của hệ thống bị hỏng /etc/gshadow"
+  },
+  "61": {
+    "id": 61,
+    "repaired": "1",
+    "harm": "High",
+    "level": "3",
+    "type": "chmod",
+    "chmod": "644",
+    "user": "root",
+    "group": "root",
+    "file": "/etc/hosts.allow",
+    "name": "Tệp tin quan trọng của hệ thống bị hỏng /etc/hosts.allow"
+  },
+  "62": {
+    "id": 62,
+    "repaired": "1",
+    "harm": "High",
+    "level": "3",
+    "type": "chmod",
+    "chmod": "644",
+    "user": "root",
+    "group": "root",
+    "file": "/etc/hosts.deny",
+    "name": "Tệp tin quan trọng của hệ thống bị hỏng /etc/hosts.deny"
+  },
+  "63": {
+    "id": 63,
+    "repaired": "1",
+    "harm": "High",
+    "level": "3",
+    "type": "chmod",
+    "chmod": "755",
+    "user": "root",
+    "group": "root",
+    "file": "/www",
+    "name": "Tệp tin quan trọng của hệ thống bị hỏng /www"
+  },
+  "64": {
+    "id": 64,
+    "repaired": "1",
+    "harm": "High",
+    "level": "3",
+    "type": "chmod",
+    "chmod": "755",
+    "user": "root",
+    "group": "root",
+    "file": "/www/server",
+    "name": "Tệp tin quan trọng của hệ thống bị hỏng /www/server"
+  },
+  "66": {
+    "id": 66,
+    "harm": "High",
+    "repaired": "1",
+    "level": "3",
+    "type": "chmod",
+    "chmod": "755",
+    "user": "root",
+    "group": "root",
+    "file": "/www/wwwroot",
+    "name": "Tệp tin quan trọng của hệ thống bị hỏng /www/wwwroot"
+  },
+  "67": {
+    "id": 67,
+    "repaired": "1",
+    "harm": "High",
+    "level": "3",
+    "type": "chmod",
+    "chmod": "644",
+    "user": "root",
+    "group": "root",
+    "file": "/etc/rc.local",
+    "name": "Tệp tin quan trọng của hệ thống bị hỏng /etc/rc.local"
+  },
+  "68": {
+    "id": 68,
+    "repaired": "1",
+    "harm": "High",
+    "level": "3",
+    "type": "chmod",
+    "chmod": "644",
+    "user": "root",
+    "group": "root",
+    "file": "/etc/rc.d/rc.local",
+    "name": "Tệp tin quan trọng của hệ thống bị hỏng /etc/rc.d/rc.local"
+  },
+  "69": {
+    "id": 69,
+    "repaired": "1",
+    "level": "3",
+    "harm": "High",
+    "type": "chmod",
+    "chmod": "600",
+    "user": "root",
+    "group": "root",
+    "file": "/var/spool/cron/root",
+    "name": "Tệp tin quan trọng của hệ thống bị hỏng /var/spool/cron/root"
+  }
+}
