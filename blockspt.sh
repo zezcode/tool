@@ -76,11 +76,6 @@ iptables -I INPUT -s 171.229.196.6 -j DROP
 iptables -I INPUT -s 104.16.210.12 -j DROP
 iptables -I INPUT -s 104.16.209.12 -j DROP
 iptables-save  > /etc/iptables/rules.v4
-apt install netfilter-persistent
-systemctl start netfilter-persistent
-systemctl restart netfilter-persistent
-systemctl enable netfilter-persistent
-systemctl status netfilter-persistent
 clear
 echo "Chặn speedtest thành công!"
 echo -e ""
