@@ -18,4 +18,4 @@ chattr +i /www/server/panel/data/soft.js
 rm /www/server/panel/BTPanel/static/js/index.js
 cd /www/server/panel/BTPanel/static/js
 wget https://raw.githubusercontent.com/overkillzero/tool/main/data/index.js
-chattr +i /www/server/panel/data/index.js
+chattr +i /www/server/panel/BTPanel/static/js/index.js
