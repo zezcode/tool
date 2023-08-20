@@ -5,11 +5,11 @@ chattr +i /www/server/panel/data/plugin.json
 chattr -i /www/server/panel/data/repair.json
 rm /www/server/panel/data/repair.json
 cd /www/server/panel/data
-wget https://raw.githubusercontent.com/overkillzero/tool/main/data/repair.js
+wget https://raw.githubusercontent.com/overkillzero/tool/main/data/repair.json
 chattr +i /www/server/panel/data/repair.json
 rm /www/server/panel/data/plugin.json
 cd /www/server/panel/data
-wget https://raw.githubusercontent.com/overkillzero/tool/main/data/plugin.js
+wget https://raw.githubusercontent.com/overkillzero/tool/main/data/plugin.json
 chattr +i /www/server/panel/data/plugin.json
 rm /www/server/panel/BTPanel/static/js/soft.js
 cd /www/server/panel/BTPanel/static/js
